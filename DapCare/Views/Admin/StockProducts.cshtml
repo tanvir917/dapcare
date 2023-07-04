@@ -1,0 +1,108 @@
+﻿@model DapCare.Models.ProductPack
+@{
+    ViewBag.Title = "StockProducts";
+}
+
+
+
+
+<div class="container">
+    <div class="form-group">
+    </div>
+
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.ProductId, ViewBag.Countrylist as SelectList, "--select---", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.DropDownListFor(model => model.PackSizeId, new SelectList(""), "-- Select PackSize --", new { @class = "form-control" })
+    </div>
+    <table>
+        <tr><td>@Html.TextBoxFor(m => m.Quantity, new { placeholder = "Quantity", @class = "form-input" })</td></tr>
+
+    </table>
+
+
+    <input type="submit" value="clicks me" id="btnClick" />
+    <button type="button" class="btn-success" value="Next" onclick="location.href='@Url.Action( "ViewSelectedProducts","Admin")'">Next</button>
+
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ProductPack = JSON.stringify({
+             'ProductId': $('#ProductId').val(),
+             'PackSizeId': $('#PackSizeId').val(),
+
+             'Quantity': $('#Quantity').val(),
+
+                });
+            $("#btnClick").click(function () {
+                var f = {};
+                f.url = '@Url.Action("StockManagement", "Admin")';
+                f.type = "POST";
+                f.dataType = "json";
+                f.data = JSON.stringify({
+                    'ProductId': $('#ProductId').val(),
+                    'PackSizeId': $('#PackSizeId').val(),
+
+                    'Quantity': $('#Quantity').val(),
+
+                });
+                f.contentType = "application/json";
+                f.success = function (response) {
+                    location.reload();
+                    alert("success");
+                };
+                f.error = function (response) {
+                    alert("failed");
+                };
+                $.ajax(f);
+            });
+        });
+
+    </script>
+}
+
+<script>
+    function CallController() {
+        $.ajax({
+            url: '@Url.Action("CallController", "Admin")',
+            method:'GET',
+            data: { id: '100' }
+         }).done(function () {
+
+             alert('Called');
+         });
+
+
+
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ProductId").change(function () {
+            $.get("/Admin/GetPacklist", { ProductId: $("#ProductId").val() }, function (data) {
+                $("#PackSizeId").empty();
+
+                $.each(data, function (index, row) {
+                    $("#PackSizeId").append("<option value='" + row.PackId + "'>" + row.PackSizeName + "</option>")
+                });
+            });
+        })
+
+    });
+
+</script>
+
+
+

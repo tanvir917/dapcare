@@ -1,0 +1,71 @@
+﻿@model DapCare.Models.FindStateMent
+
+@{
+    /**/
+
+    ViewBag.Title = "FindStateMent";
+}
+
+
+@using (Html.BeginForm("ShowSateMent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{     <div class="form-group">
+    @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+
+    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "datepicker" } })
+
+</div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "datepicker2" } })
+
+
+    </div>
+     <br/>
+
+     <div class="form-group">
+         @Html.LabelFor(model => model.EmployeId, htmlAttributes: new { @class = " " })
+
+         @Html.DropDownListFor(model => model.EmployeId, ViewBag.employelist as SelectList, "--select Employee---", new { @class = "form-control" })
+     </div>
+
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Next" class="btn btn-default btn-success" />
+    </div>
+
+}
+
+
+
+@section scripts{
+
+
+
+
+    <script>
+
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(2021, 0, 1),
+                maxDate: new Date(2040, 0, 1),
+                showOn: "both"
+            });
+        });
+        $(function () {
+            $(".datepicker2").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(2021, 0, 1),
+                maxDate: new Date(2040, 0, 1),
+                showOn: "both"
+            });
+        });
+    </script>
+
+}

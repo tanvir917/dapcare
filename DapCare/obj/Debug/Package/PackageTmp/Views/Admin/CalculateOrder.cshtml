@@ -1,0 +1,73 @@
+﻿@using DapCare.Models
+
+@{
+    ViewBag.Title = "CalculateOrder";
+}
+
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Line Total</th>
+
+        </tr>
+    </thead>
+</table>
+
+
+<div class="row">
+
+    @{
+        int Total = 0;
+    }
+    @foreach (SelectProducts item in (List<SelectProducts>)Session["TracSelectedProduct"])
+    {
+        int lineTotal = item.Quantity * item.ProductPrice;
+        Total = Convert.ToInt32(@Total + lineTotal);
+
+        <div class="col-md-3">
+            @item.ProductName
+        </div>
+        <div class="col-md-3">
+            @item.ProductPrice
+        </div>
+        <div class="col-md-4">
+            <form action="~/Admin/updateselectedproduct" method="POST">
+                <div class="selected" style="">
+                    <div class="row">
+                        <div class="quantity">
+                            <input type="number" placeholder="Discount" name="Discount" value="1">
+                        </div>
+
+                        <div class="quantity">
+                            <input type="number" placeholder="Quantity" name="Quantity" value="1">
+                        </div>
+                        <input type="hidden" id="custId" name="pid" value=@item.ProductId>
+                        <div class="col-md-2 qntty">
+                            <button class="testbrn" onclick="myFunction()" type="submit">Update</button>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-2">   <@lineTotal</div>
+
+
+
+    }
+
+
+</div>
+
+<div>Total:@Total</div>
+
+
+<button class="btn-success" onclick="location.href='@Url.Action("OrderEmploye", "Admin")'">Confirm</button>
+

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DapCare.Models.Employee>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="h2 text-center">
+            Employee Details
+        </div> <table class="table table-bordered">
+
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>
+                        Name
+                    </td>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                @foreach (var emp in Model)
+                {
+                    <tr>
+                        <td> @emp.Id </td>
+                        <td> @emp.Name </td>
+
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div> <div class="col-sm-2">
+        <div class="btnbtn-success">
+            @Html.ActionLink("Create Pdf", "CreatePdf", "Admin")
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,124 @@
+﻿@model DapCare.Models.managerparty
+@{
+    ViewBag.Title = "Deposit";
+}
+
+<div class="container">
+    <div class="form-group">
+        @Html.EditorFor(model => model.dates, new { htmlAttributes = new { @class = "datepicker" } })
+
+    </div>
+
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.EmployeId, ViewBag.employelist as SelectList, "--select---", new { @class = "form-control" })
+    </div>
+
+
+    <div class="form-group">
+
+        @Html.DropDownListFor(model => model.PartyId, new SelectList(""), "-- Select Party --", new { @class = "form-control" })
+    </div><div class="form-group">
+
+        <tr><td>@Html.TextBoxFor(m => m.Cash, new { placeholder = "Cash", @class = "form-input" })</td></tr>
+    </div>
+
+
+    <input type="submit" value="clicks me" id="btnClick" />
+  
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(2021, 0, 1),
+                maxDate: new Date(2040, 0, 1),
+                showOn: "both"
+            });
+        });
+
+        $(document).ready(function () {
+            var ProductPack = JSON.stringify({
+                'EmployeId': $('#EmployeId').val(),
+                'PartyId': $('#PartyId').val(),
+                'Cash': $('#Cash').val(),
+                'dates': $('#dates').val()
+                });
+            $("#btnClick").click(function () {
+                var f = {};
+                f.url = '@Url.Action("TestDeposit", "Admin")';
+                f.type = "POST";
+                f.dataType = "json";
+                f.data = JSON.stringify({
+                    'EmployeId': $('#EmployeId').val(),
+                    'PartyId': $('#PartyId').val(),
+                    'Cash': $('#Cash').val(),
+                    'dates': $('#dates').val()
+                });
+                f.contentType = "application/json";
+
+                f.success = function (json) {
+                    if (json.isRedirect) {
+                        window.location.href = json.redirectUrl;
+                    }
+                    //    location.reload();
+                    //   if (response == true) {
+                    //     window.location.href = 'Negative';
+                    //}
+                    // alert("success");
+                };
+
+
+
+                f.error = function (response) {
+                    alert("failed");
+                };
+                $.ajax(f);
+            });
+        });
+      
+
+    </script>
+}
+
+<script>
+    function CallController() {
+        $.ajax({
+            url: '@Url.Action("CallController", "Admin")',
+            method:'GET',
+            data: { id: '100' }
+         }).done(function () {
+
+             alert('Called');
+         });
+
+
+
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#EmployeId").change(function () {
+            $.get("/Admin/GetPartyList", { EmployeId: $("#EmployeId").val() }, function (data) {
+                $("#PartyId").empty();
+
+                $.each(data, function (index, row) {
+                    $("#PartyId").append("<option value='" + row.PartyId + "'>" + row.PartyDuplicate + "</option>")
+                });
+            });
+        })
+
+    });
+
+</script>
+
+

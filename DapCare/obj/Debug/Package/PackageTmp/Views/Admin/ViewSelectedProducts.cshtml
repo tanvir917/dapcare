@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "MyProducts";
+}
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Sr No</th>
+        <th>Product Name </th>
+        <th>PackSize</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Discount</th>
+        <th>Bonus</th>
+        <th>Action</th>
+    </tr>
+    @{
+
+
+        int count = 1;
+    }
+
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+      
+        <tr>
+            <td> @count</td>
+            <td>@Model.Rows[i][7]</td>
+            <td>@Model.Rows[i][8]</td>
+            <td>@Model.Rows[i][3]</td>
+
+            <td>@Model.Rows[i][9]</td>
+            <td>@Model.Rows[i][4]</td>
+            <td>@Model.Rows[i][5]</td>
+            <td><a href="~/Admin/DeleteBillUnit/@(Model.Rows[i][0])">Delete</a></td>
+        </tr>
+        count++;
+    }
+
+</table>
+<div>
+   
+</div>
+<button type="button" class="btn-success" value="Next" onclick="location.href='@Url.Action( "ProductPack","Admin")'">Back To Add</button>
+<button type="button" class="btn-success" value="Next" onclick="location.href='@Url.Action( "ManagerParty","Admin")'">Next</button>
+

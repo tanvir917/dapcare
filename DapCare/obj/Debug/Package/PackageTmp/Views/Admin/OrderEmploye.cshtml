@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "OrderEmploye";
+}
+
+
+<h2>Search/Filter Dropdown</h2>
+<p>Click on the button to open the dropdown menu, and use the input field to search for a specific dropdown link.</p>
+<div>
+    <a class="btn btn-success"  href="~/myorderp.aspx">Next</a>
+</div>
+<div class="dropdown">
+    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+    <div id="myDropdown" class="dropdown-content">
+        <form>
+            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+
+        </form>
+        @for (int i = 0; i < Model.Rows.Count; i++)
+        {
+
+            <a href="~/Admin/SelectEmploye?id=@Model.Rows[i][0]">@Model.Rows[i][1]  <span>@Model.Rows[i][2]</span></a>
+
+
+        }
+
+    </div>
+</div>
+
+
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+

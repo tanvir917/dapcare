@@ -1,0 +1,82 @@
+﻿@using DapCare.Models
+@{
+    ViewBag.Title = "SelectProduct";
+}
+
+@{
+    ViewBag.Title = "MyProducts";
+}
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Sr No</th>
+        <th>Product Name </th>
+        <th>Quantity</th>
+        <th>Pack Size</th>
+        <th>Price</th>
+        <th>Discount</th>
+        <th>Quantity</th>
+        <th>Action</th>
+    </tr>
+</table>
+
+<div class="container">
+
+
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+        int count = 1;
+        <div class="row">
+            <div class="col-md-1 coloums">
+                <p>@count</p>
+            </div>
+            <div class="col-md-2 coloums">
+                <p>@Model.Rows[i][1]</p>
+            </div>
+            <div class="col-md-2 coloums">
+                <p>@Model.Rows[i][4]</p>
+            </div>
+            <div class="col-md-1 coloums">
+                <p>@Model.Rows[i][6]</p>
+            </div>
+            <div class="col-md-2 coloums">
+                <p>@Model.Rows[i][5]</p>
+            </div>
+            <div class="col-md-4">
+                <form action="~/Admin/getselectproduct" method="POST">
+                    <div class="selected" style="">
+                        <div class="row">
+                            <div class="quantity">
+                                <input type="number" placeholder="Discount" name="Discount" min="1" max="9" step="1" value="1">
+                            </div>
+
+                            <div class="quantity">
+                                <input type="number" min="1" placeholder="Quantity" name="Quantity" max="9" step="1" value="1">
+                            </div>
+                            <input type="hidden" id="custId" name="pid" value=@Model.Rows[i][0]>
+                            <input type="hidden" id="custId" name="Price" value=@Model.Rows[i][4]>
+                            <div class="col-md-2 qntty">
+                                <button class="testbrn" onclick="myFunction()" type="submit">Add</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <div>
+                </div>
+            </div>
+
+
+        </div>
+        count++;
+    }
+    <a class="btn btn-success" style="margin-left:75%;margin-top:5%;" href="~/Admin/CalculateOrder ">CheckOut</a>
+        <script type="text/javascript">
+
+            function myFunction() {
+                document.body.style.backgroundColor = "red";
+            }
+        </script>
+</div>
+
+

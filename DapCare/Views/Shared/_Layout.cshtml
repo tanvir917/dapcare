@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DapCare</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- Custom styles for this template -->
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Css/simple-sidebar.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">DapCare </div>
+            <div class="list-group list-group-flush">
+                <a href="~/Admin/ProductPack" class="list-group-item list-group-item-action bg-light">Invoice </a>
+                <a href="~/Admin/ViewStock" class="list-group-item list-group-item-action bg-light">View Stock</a>
+                <a href="~/Admin/UpdateStock" class="list-group-item list-group-item-action bg-light">Update Stock</a>
+
+                <a href="~/Admin/ViewOrderPdf" class="list-group-item list-group-item-action bg-light"> Invoice History</a>
+                <a href="~/Admin/ViewAllParty" class="list-group-item list-group-item-action bg-light">ViewAllParty</a>
+                <a href="~/Admin/MyProducts" class="list-group-item list-group-item-action bg-light">ViewAllProducts</a>
+                <a href="~/Admin/ViewAllParty" class="list-group-item list-group-item-action bg-light">View All Party</a>
+                <a href="~/Admin/MyPackSize" class="list-group-item list-group-item-action bg-light">View PackSize</a>
+                <a href="~/Admin/PackSize" class="list-group-item list-group-item-action bg-light">Add Pack Size</a>
+                <a href="~/Admin/AddParty" class="list-group-item list-group-item-action bg-light">Add Party</a>
+                <a href="~/Admin/AddEmployee" class="list-group-item list-group-item-action bg-light">AddEmployee</a>
+                <a href="~/Admin/CreateMyProducts" class="list-group-item list-group-item-action bg-light">CreateMyProducts</a>
+                <a href="~/Admin/Searchorder" class="list-group-item list-group-item-action bg-light">Searchorder</a>
+                <a href="~/Admin/Deposit" class="list-group-item list-group-item-action bg-light">Deposit</a>
+                <a href="~/Admin/FindStateMent" class="list-group-item list-group-item-action bg-light">FindStateMent</a>
+              <a href="~/Admin/ShowDeposit" class="list-group-item list-group-item-action bg-light">ShowDposit</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+            </nav>
+
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+
+        <!-- /#page-content-wrapper -->
+
+
+    </div>
+
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+</body>
+</html>

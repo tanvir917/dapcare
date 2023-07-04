@@ -1,0 +1,15 @@
+﻿@model DapCare.Models. Employee
+@{
+    ViewBag.Title = "EmployeInfo";
+}
+
+
+<div class="form-group">
+    @Html.DropDownListFor(model => model.ProductId, ViewBag.Countrylist as SelectList, "--select---", new { @class = "form-control" })
+</div>
+
+<table>
+    <tr><td>@Html.TextBoxFor(m => m.Quantity, new { placeholder = "Quantity", @class = "form-input" })</td></tr>
+    <tr><td>@Html.TextBoxFor(m => m.Discount, new { placeholder = "Discount", @class = "form-input" })</td></tr>
+    <tr><td>@Html.TextBoxFor(m => m.Bonus, new { placeholder = "Bonus", @class = "form-input" })</td></tr>
+</table>

@@ -1,0 +1,104 @@
+﻿
+@model DapCare.Models.managerparty
+@{
+    ViewBag.Title = "Searchorder";
+}
+
+
+<div class="container">
+    <div class="form-group">
+    </div>
+
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.EmployeId, ViewBag.employelist as SelectList, "--select---", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.DropDownListFor(model => model.PartyId, new SelectList(""), "-- Select Party --", new { @class = "form-control" })
+    </div><div class="form-group">
+
+        <tr><td>@Html.TextBoxFor(m => m.Cash, new { placeholder = "Quantity", @class = "form-input" })</td></tr>
+    </div>
+
+
+    <input type="submit" value="clicks me" id="btnClick" />
+    <button type="button" class="btn-success" value="Next" onclick="location.href='@Url.Action( "ViewManagerparty","Admin")'">Next</button>
+
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ProductPack = JSON.stringify({
+                'EmployeId': $('#EmployeId').val(),
+                'PartyId': $('#PartyId').val(),
+                'Cash': $('#Cash').val()
+                });
+            $("#btnClick").click(function () {
+                var f = {};
+                f.url = '@Url.Action("SearchManagerParty", "Admin")';
+                f.type = "POST";
+                f.dataType = "json";
+                f.data = JSON.stringify({
+                    'EmployeId': $('#EmployeId').val(),
+                    'PartyId': $('#PartyId').val(),
+                    'Cash': $('#Cash').val()
+                });
+                f.contentType = "application/json";
+                f.success = function (response) {
+
+                    alert("success");
+                    location.href("ViewManagerparty","Admin");
+                };
+                f.error = function (response) {
+                    alert("failed");
+                };
+                $.ajax(f);
+            });
+        });
+
+    </script>
+}
+
+<script>
+    function CallController() {
+        $.ajax({
+            url: '@Url.Action("CallController", "Admin")',
+            method:'GET',
+            data: { id: '100' }
+         }).done(function () {
+
+             alert('Called');
+         });
+
+
+
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#EmployeId").change(function () {
+            $.get("/Admin/GetPartyList", { EmployeId: $("#EmployeId").val() }, function (data) {
+                $("#PartyId").empty();
+
+                $.each(data, function (index, row) {
+                    $("#PartyId").append("<option value='" + row.PartyId + "'>" + row.PartyDuplicate + "</option>")
+                });
+            });
+        })
+
+    });
+
+</script>
+
+
+
+
